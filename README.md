@@ -1,6 +1,6 @@
 # Advent of Code 2021
 
-This repository includes my C++ code/solutions for the [Advent of Code 2021](https://adventofcode.com/2021/about).
+This repository includes my [Go](https://golang.org/) code for the [Advent of Code 2021](https://adventofcode.com/2021/about).
 
 *If you want to solve the puzzles yourself first, do so, **then** look for the solution to compare.* Do **not** cheat yourself out of a great time and learning experience by just copying code!
 
