@@ -2,6 +2,8 @@
 
 This repository includes my [Go](https://golang.org/) code for the [Advent of Code 2021](https://adventofcode.com/2021/about).
 
+Yes, for this year I decided to try something new and use Go. I'm a total Go noob and I'm most likely doing things more complicated than necessary. We'll see how it goes…
+
 *If you want to solve the puzzles yourself first, do so, **then** look for the solution to compare.* Do **not** cheat yourself out of a great time and learning experience by just copying code!
 
 **Please keep in mind most of this is hacked together. I don't claim it's perfect code or even in all cases 100% valid/defined/proper code or whatever. It's for fun and it got the job done in a short amount of time.** 😀
@@ -11,8 +13,6 @@ I'll update this repository now and then to include all my solutions whenever I'
 This is mostly for those that are curious. If you want to look at the code, experiment with it, change it, etc. be my guest.
 
 ## Running from command line
-
-For this year I decided to try something new and use [Go](https://golang.org/). We'll see how it goes…
 
 To run the code for any given day, use the following line (replacing `1` with the number of the desired day):
 
