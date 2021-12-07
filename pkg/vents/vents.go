@@ -53,11 +53,11 @@ func (vm *VentMap) Print() {
 	out := ""
 	xs, ys, xe, ye := 0, 0, 0, 0
 	for k, row := range *vm {
-		ys = min(ys, k)
-		ye = max(ye, k)
+		ys = numbers.Min(ys, k)
+		ye = numbers.Max(ye, k)
 		for l := range row {
-			xs = min(xs, l)
-			xe = max(xe, l)
+			xs = numbers.Min(xs, l)
+			xe = numbers.Max(xe, l)
 		}
 	}
 
@@ -76,34 +76,13 @@ func (vm *VentMap) Print() {
 	print(out)
 }
 
-func min(a int, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func abs(a int) int {
-	if a < 0 {
-		return -a
-	}
-	return a
-}
-
 // This could be done more simple, but I had
 // the floating point approach for any diagonal
 // line, then I get to part two and it's only 45 degree…
 func (vm *VentMap) AddVent(v Vent) {
 	dx := v.End.X - v.Start.X
 	dy := v.End.Y - v.Start.Y
-	steps := max(abs(dx), abs(dy))
+	steps := numbers.Max(numbers.Abs(dx), numbers.Abs(dy))
 	dx /= steps
 	dy /= steps
 	for i := 0; i <= steps; i++ {
