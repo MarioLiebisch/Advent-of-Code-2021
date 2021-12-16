@@ -31,12 +31,12 @@ func main() {
 
 	for _, sample := range samples2 {
 		p, _ := bits.ReadPacketHex(sample)
-		println("Solution 2 - Sample", sample, "->", p.GetValue())
+		println("Solution 2 - Sample", sample, "->", p.Evaluate())
 	}
 
 	println()
 
 	input := bits.LoadBits("./data/input-16.txt")
 	println("Solution 1 - Input:", input.Packet.GetVersionSum())
-	println("Solution 2 - Input:", input.Packet.GetValue())
+	println("Solution 2 - Input:", input.Packet.Evaluate())
 }

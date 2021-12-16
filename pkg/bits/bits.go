@@ -3,6 +3,7 @@ package bits
 import (
 	"aoc2021/pkg/io"
 	"log"
+	"math"
 )
 
 var hexbits map[rune]string = map[rune]string{
@@ -117,55 +118,6 @@ func ReadPacket(bits string) (BitsPacket, int) {
 			}
 		}
 
-		// Perform the actual operation now that we have the sub packets
-		switch p.typeId {
-		case 0: // sum
-			sum := 0
-			for _, sp := range p.packets {
-				sum += sp.value
-			}
-			p.value = sum
-		case 1: // product
-			prod := 1
-			for _, sp := range p.packets {
-				prod *= sp.value
-			}
-			p.value = prod
-		case 2: // minimum
-			min := p.packets[0].value
-			for _, sp := range p.packets {
-				if sp.value < min {
-					min = sp.value
-				}
-			}
-			p.value = min
-		case 3: // maximum
-			max := p.packets[0].value
-			for _, sp := range p.packets {
-				if sp.value > max {
-					max = sp.value
-				}
-			}
-			p.value = max
-		case 5: // greater than
-			if p.packets[0].value > p.packets[1].value {
-				p.value = 1
-			} else {
-				p.value = 0
-			}
-		case 6: // less than
-			if p.packets[0].value < p.packets[1].value {
-				p.value = 1
-			} else {
-				p.value = 0
-			}
-		case 7: // equal to
-			if p.packets[0].value == p.packets[1].value {
-				p.value = 1
-			} else {
-				p.value = 0
-			}
-		}
 	}
 	return p, consumed
 }
@@ -178,6 +130,54 @@ func (p *BitsPacket) GetVersionSum() int {
 	return sum
 }
 
-func (p *BitsPacket) GetValue() int {
-	return p.value
+func (p *BitsPacket) Evaluate() int {
+	switch p.typeId {
+	case 0: // sum
+		sum := 0
+		for _, sp := range p.packets {
+			sum += sp.Evaluate()
+		}
+		return sum
+	case 1: // product
+		prod := 1
+		for _, sp := range p.packets {
+			prod *= sp.Evaluate()
+		}
+		return prod
+	case 2: // minimum
+		min := math.MaxInt
+		for _, sp := range p.packets {
+			if sp.Evaluate() < min {
+				min = sp.Evaluate()
+			}
+		}
+		return min
+	case 3: // maximum
+		max := math.MinInt
+		for _, sp := range p.packets {
+			if sp.Evaluate() > max {
+				max = sp.Evaluate()
+			}
+		}
+		return max
+	case 4: // literal
+		return p.value
+	case 5: // greater than
+		if p.packets[0].Evaluate() > p.packets[1].Evaluate() {
+			return 1
+		}
+		return 0
+	case 6: // less than
+		if p.packets[0].Evaluate() < p.packets[1].Evaluate() {
+			return 1
+		}
+		return 0
+	case 7: // equal to
+		if p.packets[0].Evaluate() == p.packets[1].Evaluate() {
+			return 1
+		}
+		return 0
+	}
+	log.Fatalln("Unhandled Operand:", p.typeId)
+	return 0
 }
